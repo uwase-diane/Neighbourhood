@@ -1,25 +1,21 @@
-from .models import Profile, Neighbourhood, Business ,Post
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.forms import ModelForm,Textarea,IntegerField
+from .models import Neighbourhood,Business,Post,Profile
 
 
-class UpdateProfile(forms.ModelForm):
+class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio','profilepic','email']
-        exclude = ['user']
-
-class NeighborhoodForm(forms.ModelForm):
+        exclude = ['user','neighbourhoods']
+class NeighbourhoodForm(forms.ModelForm):
     class Meta:
-        fields = ['Neighborhood','Neighborhood_location','population','pilice_no','hospital_no']    
-
-
-class BusinessForm(forms.modelForm):
+        model=Neighbourhood
+        fields = ['hood_name','location','hood_image','description','health_tell','police_number']
+class NewBusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ['image','project','email']
-
-class PostMessageForm(forms.ModelForm):
+        fields=['business_name','description','email']
+class NewPostForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ['message']                    
+        model=Post
+        fields=['post']
